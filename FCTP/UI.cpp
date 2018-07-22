@@ -16,7 +16,7 @@ UI_class::~UI_class()
 
 }
 
-void UI_class::DrawUI(int area[20][10])
+void UI_class::DrawUI(int area[20][10], int score = 0)
 {
 	for (int i = 0; i < 22; i++)
 	{
