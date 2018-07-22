@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "TimeManager.h"
+
 #include <iostream>
 #include <random>
 
@@ -14,9 +16,11 @@ Game_class::~Game_class()
 
 void Game_class::Loop()
 {
+	Time time_manager;
+
 	m_Finished = false;
 	m_BlockSpawned = false;
-	m_Playing = false;
+	m_Playing = true;
 	m_Score = 0;
 	m_TimePlayed = 0;
 	ClearArea();
@@ -29,6 +33,8 @@ void Game_class::Loop()
 	{
 		if (m_Playing)
 		{
+			m_TimePlayed = time_manager.GetTime();
+
 			if (!m_BlockSpawned)
 			{
 				m_CurrentFallingBlock = CreateRandomBlock(block_distribution(mt));

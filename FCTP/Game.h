@@ -39,7 +39,7 @@ public:
 	bool m_Playing;
 	bool m_BlockSpawned;
 	int m_Score;
-	int m_TimePlayed;
+	double m_TimePlayed;
 	int m_Area[20][10];
 	Block_struct m_CurrentFallingBlock;
 
