@@ -2,7 +2,10 @@
 
 #include "Windows.h"
 #include <iostream>
-#include <wchar.h>
+#include "wchar.h"
+#include "conio.h"
+
+//enum eDirection {UP, DOWN, CHOOSE};
 
 using namespace std;
 
@@ -18,16 +21,49 @@ UI_class::~UI_class()
 
 bool UI_class::MainMenu()
 {
+	ClearRectangle(0, 0, 24, 22);
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {9, 8});
 	cout << "Start";
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {9, 11});
 	cout << "Exit";
-	system("pause");
+	bool choice = true;
+	while(true)
+	{
+		if (_kbhit())
+		{
+			switch (_getch())
+			{
+				case 'w':
+				{
+					ClearRectangle(7, 8, 9, 12);
+					SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 7, 8 });
+					cout << "->";
+					choice = true;
+					break;
+				}
+				case 's':
+				{
+					ClearRectangle(7, 8, 9, 12);
+					SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 7, 11 });
+					cout << "->";
+					choice = false;
+					break;
+				}
+				case '\r':
+				{
+					return choice;
+					break;
+				}
+			}
+		}
+	}
 	return true;
 }
 
 void UI_class::DrawUI(int area[20][10], int score = 0)
 {
+	ClearRectangle(0, 0, 24, 22);
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0, 0 });
 	for (int i = 0; i < 22; i++)
 	{
 		for (int j = 0; j < 12; j++)

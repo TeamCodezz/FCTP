@@ -13,7 +13,7 @@ int main()
 	UI->SetCmdSize(24, 22);
 	if (UI->MainMenu())
 	{
-		//UI->DrawUI(Game->m_Area, Game->m_Score);
+		UI->DrawUI(Game->m_Area, Game->m_Score);
 		Game->Loop();
 	}
 	
