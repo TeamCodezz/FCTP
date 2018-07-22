@@ -10,11 +10,16 @@ int main()
 
 	UI->SetFont();
 	UI->TextColor(15);
-	UI->SetCmdSize(12, 23);
-	UI->DrawUI(Game->m_Area);
+	UI->SetCmdSize(24, 22);
+	if (UI->MainMenu())
+	{
+		//UI->DrawUI(Game->m_Area, Game->m_Score);
+		Game->Loop();
+	}
+	
 	//UI->ClearRectangle(0, 0, 12, 23);
   
-	Game->Loop();
+	//Game->Loop();
 
 	delete Game;
 	delete UI;
