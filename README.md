@@ -1,2 +1,2 @@
-# FCPP
-Funny Coop Programming Project
+# FCTP
+Funny Coop Tetris Project
