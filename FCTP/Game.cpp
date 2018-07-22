@@ -33,6 +33,10 @@ void Game_class::Loop()
 	{
 		if (m_Playing)
 		{
+			for (int i = 0; i < 100; i++);
+
+			m_UI->DrawUI(m_Area, m_Score);
+
 			m_TimePlayed = time_manager.GetTime();
 
 			if (!m_BlockSpawned)
@@ -72,7 +76,7 @@ void Game_class::PushBlockToArea(Block_struct block)
 		for (int w = 0; w < block.m_W; w++)
 		{
 			if (m_Area[block.m_Y + h][block.m_X + w] == 0)
-				m_Area[block.m_Y + h][block.m_X + w] = block.m_Structure[h][w];
+				m_Area[block.m_Y + h][block.m_X + w] = block.m_Structure[h][w] * block.m_Color;
 		}
 	}
 }
@@ -144,6 +148,8 @@ Block_struct Game_class::CreateRandomBlock(int random_number)
 		tempBlock.m_X = 4;
 		tempBlock.m_Y = 0;
 
+		tempBlock.m_Color = 1;
+
 		tempBlock.m_Structure[0][1] = 1;
 		tempBlock.m_Structure[1][0] = 1; tempBlock.m_Structure[1][1] = 1; tempBlock.m_Structure[1][2] = 1;
 
@@ -157,6 +163,8 @@ Block_struct Game_class::CreateRandomBlock(int random_number)
 		tempBlock.m_X = 4;
 		tempBlock.m_Y = 0;
 
+		tempBlock.m_Color = 2;
+
 		tempBlock.m_Structure[0][2] = 1;
 		tempBlock.m_Structure[1][0] = 1; tempBlock.m_Structure[1][1] = 1; tempBlock.m_Structure[1][2] = 1;
 
@@ -169,6 +177,8 @@ Block_struct Game_class::CreateRandomBlock(int random_number)
 		tempBlock.m_H = 2;
 		tempBlock.m_X = 4;
 		tempBlock.m_Y = 0;
+
+		tempBlock.m_Color = 3;
 
 		tempBlock.m_Structure[0][0] = 1; tempBlock.m_Structure[0][1] = 1;
 		tempBlock.m_Structure[1][0] = 1; tempBlock.m_Structure[1][1] = 1;
