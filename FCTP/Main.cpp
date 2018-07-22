@@ -11,8 +11,8 @@ int main()
 	UI->SetFont();
 	UI->TextColor(15);
 	UI->SetCmdSize(12, 23);
-
-	UI->ClearRectangle(0, 0, 12, 23);
+	UI->DrawUI(Game->m_Area);
+	//UI->ClearRectangle(0, 0, 12, 23);
   
 	Game->Loop();
 
