@@ -16,6 +16,16 @@ UI_class::~UI_class()
 
 }
 
+bool UI_class::MainMenu()
+{
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {9, 8});
+	cout << "Start";
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {9, 11});
+	cout << "Exit";
+	system("pause");
+	return true;
+}
+
 void UI_class::DrawUI(int area[20][10], int score = 0)
 {
 	for (int i = 0; i < 22; i++)
@@ -29,6 +39,8 @@ void UI_class::DrawUI(int area[20][10], int score = 0)
 			else
 				cout << area[i][j];
 		}
+		if(i != 21)
+			cout << endl;
 	}
 }
 
