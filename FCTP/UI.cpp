@@ -16,9 +16,20 @@ UI_class::~UI_class()
 
 }
 
-void UI_class::DrawUI()
+void UI_class::DrawUI(int area[20][10])
 {
-
+	for (int i = 0; i < 22; i++)
+	{
+		for (int j = 0; j < 12; j++)
+		{
+			if (i == 0 || i == 21 || j == 0 || j == 11)
+				cout << "#";
+			else if (area[i][j] == 0)
+				cout << " ";
+			else
+				cout << area[i][j];
+		}
+	}
 }
 
 void UI_class::ClearRow(int X, int Y, int rowWidth)
@@ -36,7 +47,7 @@ void UI_class::ClearRow(int X, int Y, int rowWidth)
 	// Fill the row with spaces
 	if (!FillConsoleOutputCharacter(
 		hStdOut,
-		(TCHAR) 'A',
+		(TCHAR) ' ',
 		rowWidth,
 		homeCoords,
 		&count
