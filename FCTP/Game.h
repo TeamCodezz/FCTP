@@ -12,6 +12,7 @@ struct Block_struct
 {
 	int m_X, m_Y;
 	int m_W, m_H;
+	int m_Color;
 	int m_Structure[4][4] = { 0 };
 };
 
