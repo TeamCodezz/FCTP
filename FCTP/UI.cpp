@@ -51,6 +51,7 @@ bool UI_class::MainMenu()
 				}
 				case '\r':
 				{
+					ClearRectangle(0, 0, 24, 22);
 					return choice;
 					break;
 				}
@@ -60,24 +61,40 @@ bool UI_class::MainMenu()
 	return true;
 }
 
+void UI_class::DrawArea()
+{
+	HANDLE hout = GetStdHandle(STD_OUTPUT_HANDLE);
+	DWORD count = 1;
+	for (int i = 0; i < 12; i++)
+	{
+		FillConsoleOutputCharacterW(hout, (WCHAR)'#', 1, { (SHORT)i,0 }, &count);
+		FillConsoleOutputCharacterW(hout, (WCHAR)'#', 1, { (SHORT)i,21 }, &count);
+	}
+	for (int i = 1; i < 21; i++)
+	{
+		FillConsoleOutputCharacterW(hout, (WCHAR)'#', 1, { 0,(SHORT)i }, &count);
+		FillConsoleOutputCharacterW(hout, (WCHAR)'#', 1, { 11,(SHORT)i }, &count);
+	}
+	m_AreaDrawn = true;
+}
+
 void UI_class::DrawUI(int area[20][10], int score = 0)
 {
-	ClearRectangle(0, 0, 24, 22);
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0, 0 });
-	for (int i = 0; i < 22; i++)
+	if (!m_AreaDrawn)
+		DrawArea();
+
+	HANDLE hout = GetStdHandle(STD_OUTPUT_HANDLE);
+	DWORD count = 1;
+
+	ClearRectangle(1, 1, 10, 20);
+	/*for (int mapY = 0; mapY < 20; mapY++)
 	{
-		for (int j = 0; j < 12; j++)
+		for (int mapX = 0; mapX < 10; mapX++)
 		{
-			if (i == 0 || i == 21 || j == 0 || j == 11)
-				cout << "#";
-			else if (area[i][j] == 0)
-				cout << " ";
-			else
-				cout << area[i][j];
+			if(area[mapY][mapX] == )
 		}
-		if(i != 21)
-			cout << endl;
-	}
+	}*/
+	Sleep(1000);
 }
 
 void UI_class::ClearRow(int X, int Y, int rowWidth)
@@ -141,6 +158,8 @@ void UI_class::TextColor(int color)
 void UI_class::SetCmdSize(int width, int height)
 {
 	COORD coord = { width, height};
+
+	SetConsoleTitleW(L"TETRIS (FCTP)");
 
 	_SMALL_RECT Rect;
 	Rect.Top = 0;
