@@ -4,9 +4,9 @@
 #include <iostream>
 #include <random>
 
-Game_class::Game_class(UI_class* UI)
+Game_class::Game_class(UI_class* UI_)
 {
-	m_UI = UI;
+	m_UI = UI_;
 }
 
 Game_class::~Game_class()
@@ -69,29 +69,38 @@ void Game_class::Loop()
 	}
 }
 
-void Game_class::PushBlockToArea(Block_struct block)
+bool Game_class::CheckRow(int row_)
 {
-	for (int h = 0; h < block.m_H; h++)
+	bool valid = true;
+	for (int i = 0; i < 10; i++)
+		if ((m_Area[row_][i]) == 0)
+			valid = false;
+	return valid;
+}
+
+void Game_class::PushBlockToArea(Block_struct block_)
+{
+	for (int h = 0; h < block_.m_H; h++)
 	{
-		for (int w = 0; w < block.m_W; w++)
+		for (int w = 0; w < block_.m_W; w++)
 		{
-			if (m_Area[block.m_Y + h][block.m_X + w] == 0)
-				m_Area[block.m_Y + h][block.m_X + w] = block.m_Structure[h][w] * block.m_Color;
+			if (m_Area[block_.m_Y + h][block_.m_X + w] == 0)
+				m_Area[block_.m_Y + h][block_.m_X + w] = block_.m_Structure[h][w] * block_.m_Color;
 		}
 	}
 }
 
-Collision_struct Game_class::Collision(Block_struct colliding_block)
+Collision_struct Game_class::Collision(Block_struct colliding_block_)
 {
 	Collision_struct tempCollision;
 	tempCollision.m_State = false;
 	tempCollision.m_Type = COLLISION_TYPE_NULL;
 
-	for (int h = 0; h < colliding_block.m_H; h++)
-		for (int w = 0; w < colliding_block.m_W; w++)
+	for (int h = 0; h < colliding_block_.m_H; h++)
+		for (int w = 0; w < colliding_block_.m_W; w++)
 			if (colliding_block.m_Structure[h][w] == 1)
 			{
-				if (m_Area[colliding_block.m_Y + h + 1][colliding_block.m_X + w] == 1)
+				if (m_Area[colliding_block_.m_Y + h + 1][colliding_block_.m_X + w] == 1)
 				{
 					tempCollision.m_State = true;
 					tempCollision.m_Type = COLLISION_TYPE_BLOCK;
@@ -99,7 +108,7 @@ Collision_struct Game_class::Collision(Block_struct colliding_block)
 					return tempCollision;
 				}
 
-				if (colliding_block.m_Y >= 20)
+				if (colliding_block_.m_Y >= 20)
 				{
 					tempCollision.m_State = true;
 					tempCollision.m_Type = COLLISION_TYPE_FLOOR;
@@ -107,7 +116,7 @@ Collision_struct Game_class::Collision(Block_struct colliding_block)
 					return tempCollision;
 				}
 
-				if (colliding_block.m_X <= 0)
+				if (colliding_block_.m_X <= 0)
 				{
 					tempCollision.m_State = true;
 					tempCollision.m_Type = COLLISION_TYPE_WALL_LEFT;
@@ -115,7 +124,7 @@ Collision_struct Game_class::Collision(Block_struct colliding_block)
 					return tempCollision;
 				}
 
-				if (colliding_block.m_X + w >= 10)
+				if (colliding_block_.m_X + w >= 10)
 				{
 					tempCollision.m_State = true;
 					tempCollision.m_Type = COLLISION_TYPE_WALL_RIGHT;
@@ -134,14 +143,14 @@ void Game_class::ClearArea()
 			m_Area[i][j] = 0;
 }
 
-Block_struct Game_class::CreateRandomBlock(int random_number)
+Block_struct Game_class::CreateRandomBlock(int random_number_)
 {
 	Block_struct tempBlock;
 
-	if (random_number > 4 || random_number < 1)
+	if (random_number_ > 4 || random_number_ < 1)
 		return tempBlock;
 
-	if (random_number == 1)
+	if (random_number_ == 1)
 	{
 		tempBlock.m_W = 3;
 		tempBlock.m_H = 2;
@@ -156,7 +165,7 @@ Block_struct Game_class::CreateRandomBlock(int random_number)
 		return tempBlock;
 	}
 
-	if (random_number == 2)
+	if (random_number_ == 2)
 	{
 		tempBlock.m_W = 3;
 		tempBlock.m_H = 2;
@@ -171,7 +180,7 @@ Block_struct Game_class::CreateRandomBlock(int random_number)
 		return tempBlock;
 	}
 
-	if (random_number == 3)
+	if (random_number_ == 3)
 	{
 		tempBlock.m_W = 2;
 		tempBlock.m_H = 2;

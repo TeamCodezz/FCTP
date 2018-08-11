@@ -25,15 +25,16 @@ struct Collision_struct
 class Game_class
 {
 public:
-	Game_class(UI_class* UI);
+	Game_class(UI_class* UI_);
 	~Game_class();
 
 	// Methodes here
 	void Loop();
 	void ClearArea();
-	void PushBlockToArea(Block_struct block);
-	Collision_struct Collision(Block_struct colliding_block);
-	Block_struct CreateRandomBlock(int random_number);
+	void PushBlockToArea(Block_struct block_);
+	Collision_struct Collision(Block_struct colliding_block_);
+	Block_struct CreateRandomBlock(int random_number_);
+	bool CheckRow(int row_);
 
 	// Variables here
 	bool m_Finished;
