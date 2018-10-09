@@ -98,7 +98,7 @@ Collision_struct Game_class::Collision(Block_struct colliding_block_)
 
 	for (int h = 0; h < colliding_block_.m_H; h++)
 		for (int w = 0; w < colliding_block_.m_W; w++)
-			if (colliding_block.m_Structure[h][w] == 1)
+			if (colliding_block_.m_Structure[h][w] == 1)
 			{
 				if (m_Area[colliding_block_.m_Y + h + 1][colliding_block_.m_X + w] == 1)
 				{

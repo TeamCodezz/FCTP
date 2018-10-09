@@ -227,7 +227,7 @@ void UI_class::CmdSetup(int width, int height)
 	SetConsoleWindowInfo(Handle, TRUE, &Rect);			// Set Window Size 
 	SetConsoleScreenBufferSize(Handle, coord);			// Set Buffer Size 
 
-	CONSOLE_CURSOR_INFO info;							// Set Cursor invisible
+	CONSOLE_CURSOR_INFO info;							// Set Cursor visible/invisible
 	info.dwSize = 100;
 	info.bVisible = FALSE;
 	SetConsoleCursorInfo(Handle, &info);
